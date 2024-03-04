@@ -1,10 +1,17 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
+import userRouter from './router/auth.js' 
 
 const app = express();
 
 dotenv.config({ path: "./.env" });
+
+app.use(express.json());
+
+
+//link router file here as done below
+app.use(userRouter);
 
 //MIDDLEWARE
 const middleware = (req, res, next) => {
@@ -12,9 +19,7 @@ const middleware = (req, res, next) => {
   next();
 };
 
-app.get("/", (req, res) => {
-  res.send("hello world from server");
-});
+
 app.get("/about", (req, res) => {
   res.send("hello about world from server");
 });
